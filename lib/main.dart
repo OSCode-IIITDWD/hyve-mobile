@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hyve/features/onboarding/view/onboarding_page.dart';
+import 'package:hyve/core/theme/app_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,13 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Hyve',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
       home: const OnBoardingScreen(),
     );
   }
 }
-
