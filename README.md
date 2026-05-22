@@ -21,4 +21,4 @@ To run the application locally:
 
 ## Contributing
 
-We welcome contributions to Hyve! Please read our [Contributing Guidelines](CONTRIBUTING.md) to understand the codebase structure, context-driven theme settings, and state management via BLoC before making changes.
+We welcome contributions to Hyve! Please read our [Contributing Guidelines](doc/CONTRIBUTING.md) to understand the codebase structure, context-driven theme settings, and state management via BLoC before making changes.
