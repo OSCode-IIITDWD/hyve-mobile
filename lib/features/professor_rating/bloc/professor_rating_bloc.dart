@@ -14,8 +14,7 @@ class ProfessorRatingBloc
     on<ProfessorRatingSearchChanged>(_onSearchChanged);
     on<ProfessorRatingDepartmentSelected>(_onDepartmentSelected);
     on<ProfessorRatingProfessorSelected>(_onProfessorSelected);
-    on<ProfessorRatingBackTapped>(_onBackTapped);
-    on<ProfessorRatingWriteReviewTapped>(_onWriteReviewTapped);
+    on<ProfessorRatingReviewStarted>(_onReviewStarted);
     on<ProfessorRatingSeeAllReviewsTapped>(_onSeeAllReviewsTapped);
     on<ProfessorRatingValueChanged>(_onValueChanged);
     on<ProfessorRatingCourseChanged>(_onCourseChanged);
@@ -62,43 +61,17 @@ class ProfessorRatingBloc
     emit(
       state.copyWith(
         selectedProfessorId: event.professorId,
-        view: ProfessorRatingView.details,
         didSubmit: false,
         showAllReviews: false,
       ),
     );
   }
 
-  void _onBackTapped(
-    ProfessorRatingBackTapped event,
+  void _onReviewStarted(
+    ProfessorRatingReviewStarted event,
     Emitter<ProfessorRatingState> emit,
   ) {
-    if (state.view == ProfessorRatingView.review) {
-      emit(state.copyWith(view: ProfessorRatingView.details));
-      return;
-    }
-    if (state.view == ProfessorRatingView.details) {
-      emit(
-        state.copyWith(
-          view: ProfessorRatingView.list,
-          didSubmit: false,
-          showAllReviews: false,
-        ),
-      );
-    }
-  }
-
-  void _onWriteReviewTapped(
-    ProfessorRatingWriteReviewTapped event,
-    Emitter<ProfessorRatingState> emit,
-  ) {
-    emit(
-      state.copyWith(
-        view: ProfessorRatingView.review,
-        form: const ProfessorRatingForm(),
-        didSubmit: false,
-      ),
-    );
+    emit(state.copyWith(form: const ProfessorRatingForm(), didSubmit: false));
   }
 
   void _onSeeAllReviewsTapped(
@@ -141,7 +114,7 @@ class ProfessorRatingBloc
     ProfessorRatingReviewSubmitted event,
     Emitter<ProfessorRatingState> emit,
   ) async {
-    final professor = state.selectedProfessor;
+    final professor = state.professorById(event.professorId);
     if (professor == null || !state.form.isValid || state.isSubmitting) return;
 
     emit(state.copyWith(isSubmitting: true));
@@ -165,7 +138,6 @@ class ProfessorRatingBloc
     emit(
       state.copyWith(
         professors: updatedProfessors,
-        view: ProfessorRatingView.details,
         form: const ProfessorRatingForm(),
         isSubmitting: false,
         didSubmit: true,

@@ -22,9 +22,7 @@ class ProfessorRatingProfessorSelected extends ProfessorRatingEvent {
   final String professorId;
 }
 
-class ProfessorRatingBackTapped extends ProfessorRatingEvent {}
-
-class ProfessorRatingWriteReviewTapped extends ProfessorRatingEvent {}
+class ProfessorRatingReviewStarted extends ProfessorRatingEvent {}
 
 class ProfessorRatingSeeAllReviewsTapped extends ProfessorRatingEvent {}
 
@@ -47,6 +45,10 @@ class ProfessorRatingReviewTextChanged extends ProfessorRatingEvent {
   final String text;
 }
 
-class ProfessorRatingReviewSubmitted extends ProfessorRatingEvent {}
+class ProfessorRatingReviewSubmitted extends ProfessorRatingEvent {
+  ProfessorRatingReviewSubmitted(this.professorId);
+
+  final String professorId;
+}
 
 class ProfessorRatingSubmissionMessageDismissed extends ProfessorRatingEvent {}

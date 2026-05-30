@@ -77,7 +77,7 @@ class ReviewFormView extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: form.isValid && !isSubmitting
                   ? () => context.read<ProfessorRatingBloc>().add(
-                      ProfessorRatingReviewSubmitted(),
+                      ProfessorRatingReviewSubmitted(professor.id),
                     )
                   : null,
               icon: isSubmitting

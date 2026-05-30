@@ -97,7 +97,9 @@ class ProfessorDetailsView extends StatelessWidget {
 }
 
 class WriteReviewBar extends StatelessWidget {
-  const WriteReviewBar({super.key});
+  const WriteReviewBar({super.key, required this.onPressed});
+
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -123,9 +125,7 @@ class WriteReviewBar extends StatelessWidget {
         child: SizedBox(
           height: 54,
           child: ElevatedButton.icon(
-            onPressed: () => context.read<ProfessorRatingBloc>().add(
-              ProfessorRatingWriteReviewTapped(),
-            ),
+            onPressed: onPressed,
             icon: const Icon(Icons.edit_square, size: 20),
             label: const Text('Write a Review'),
             style: ElevatedButton.styleFrom(

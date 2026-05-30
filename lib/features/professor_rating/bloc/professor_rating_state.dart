@@ -1,7 +1,5 @@
 part of 'professor_rating_bloc.dart';
 
-enum ProfessorRatingView { list, details, review }
-
 enum ReviewCategory { overall, clarity, helpful, difficulty, grading }
 
 // Collects the transient inputs for the review form before submit.
@@ -60,7 +58,6 @@ class ProfessorRatingState {
     this.professors = const [],
     this.query = '',
     this.department = 'All',
-    this.view = ProfessorRatingView.list,
     this.selectedProfessorId,
     this.form = const ProfessorRatingForm(),
     this.isSubmitting = false,
@@ -71,7 +68,6 @@ class ProfessorRatingState {
   final List<Professor> professors;
   final String query;
   final String department;
-  final ProfessorRatingView view;
   final String? selectedProfessorId;
   final ProfessorRatingForm form;
   final bool isSubmitting;
@@ -79,10 +75,16 @@ class ProfessorRatingState {
   final bool showAllReviews;
 
   // Resolves the selected professor directly from the current in-memory list.
-  Professor? get selectedProfessor {
+  Professor? professorById(String? professorId) {
     for (final professor in professors) {
-      if (professor.id == selectedProfessorId) return professor;
+      if (professor.id == professorId) return professor;
     }
+    return null;
+  }
+
+  Professor? get selectedProfessor {
+    final selectedProfessor = professorById(selectedProfessorId);
+    if (selectedProfessor != null) return selectedProfessor;
     return professors.isEmpty ? null : professors.first;
   }
 
@@ -124,7 +126,6 @@ class ProfessorRatingState {
     List<Professor>? professors,
     String? query,
     String? department,
-    ProfessorRatingView? view,
     String? selectedProfessorId,
     ProfessorRatingForm? form,
     bool? isSubmitting,
@@ -135,7 +136,6 @@ class ProfessorRatingState {
       professors: professors ?? this.professors,
       query: query ?? this.query,
       department: department ?? this.department,
-      view: view ?? this.view,
       selectedProfessorId: selectedProfessorId ?? this.selectedProfessorId,
       form: form ?? this.form,
       isSubmitting: isSubmitting ?? this.isSubmitting,

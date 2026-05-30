@@ -24,12 +24,11 @@ class RatingStars extends StatelessWidget {
         final value = index + 1;
         final icon = _iconForIndex(index, normalizedRating);
         final isActive = icon != Icons.star_border;
+        final enabled = onChanged != null;
         return GestureDetector(
-          onTap: onChanged == null ? null : () => onChanged!(value),
+          onTap: enabled ? () => onChanged!(value) : null,
           child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: onChanged == null ? 0 : 3,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: enabled ? 0 : 3),
             child: Icon(
               icon,
               color: isActive ? palette.primary : palette.surfaceContainer,

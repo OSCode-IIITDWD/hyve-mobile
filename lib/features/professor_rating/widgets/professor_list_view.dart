@@ -8,10 +8,12 @@ class ProfessorListView extends StatelessWidget {
   const ProfessorListView({
     super.key,
     required this.state,
+    required this.onProfessorTap,
     this.searchFocusNode,
   });
 
   final ProfessorRatingState state;
+  final ValueChanged<String> onProfessorTap;
   final FocusNode? searchFocusNode;
 
   @override
@@ -45,9 +47,7 @@ class ProfessorListView extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 16),
               child: ProfessorCard(
                 professor: professor,
-                onTap: () => context.read<ProfessorRatingBloc>().add(
-                  ProfessorRatingProfessorSelected(professor.id),
-                ),
+                onTap: () => onProfessorTap(professor.id),
               ),
             ),
           ),
@@ -95,10 +95,7 @@ class _SearchFieldState extends State<_SearchField> {
       decoration: InputDecoration(
         hintText: 'Search by name or department',
         hintStyle: context.professorBodyMuted,
-        prefixIcon: Icon(
-          Icons.search,
-          color: palette.textMuted,
-        ),
+        prefixIcon: Icon(Icons.search, color: palette.textMuted),
         filled: true,
         fillColor: Theme.of(context).colorScheme.surfaceContainerLowest,
         contentPadding: const EdgeInsets.symmetric(vertical: 16),
@@ -141,14 +138,14 @@ class _DepartmentChips extends StatelessWidget {
             showCheckmark: false,
             label: Text(department),
             labelStyle: context.professorLabel.copyWith(
-              color: selected ? Theme.of(context).colorScheme.onPrimary : palette.textMuted,
+              color: selected
+                  ? Theme.of(context).colorScheme.onPrimary
+                  : palette.textMuted,
             ),
             selectedColor: palette.primary,
             backgroundColor: palette.surface,
             side: BorderSide(
-              color: selected
-                  ? palette.primary
-                  : palette.surfaceVariant,
+              color: selected ? palette.primary : palette.surfaceVariant,
             ),
             shape: const StadiumBorder(),
           );
