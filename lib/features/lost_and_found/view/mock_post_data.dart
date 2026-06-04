@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hyve/features/lost_and_found/data/models/post_models.dart';
 
-Future<List<PostModel>> fetchXYZ() async {
+Future<List<PostModel>> fetchLostandFoundPosts() async {
   return samplePostList;
 }
 
