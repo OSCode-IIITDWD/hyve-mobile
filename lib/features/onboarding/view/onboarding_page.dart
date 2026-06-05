@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hyve/core/theme/app_theme.dart';
-import 'package:hyve/features/home/view/home_page.dart';
+import "package:hyve/features/auth/view/login.dart";
 import 'package:hyve/features/onboarding/bloc/onboarding_bloc.dart';
 
 // ─── Data Model ──────────────────────────────────────────────────────────────
@@ -93,7 +93,7 @@ class _OnBoardingViewState extends State<_OnBoardingView> {
           _syncPageController(state.currentIndex);
         } else if (state is OnboardingComplete) {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (_) => HomePage()),
+            MaterialPageRoute(builder: (_) => LoginPage()),
           );
         }
       },

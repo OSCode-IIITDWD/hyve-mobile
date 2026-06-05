@@ -6,12 +6,12 @@ class AppColors {
   AppColors._();
   // dart format off
   static const bgDark      = Color(0xFFE6E6E6);
-  static const bg          = Color(0xFFF2F2F2);
+  static const bg          = Color(0xFFFFFFFF);
   static const bgLight     = Color(0xFFFFF5FF);
   static const highlight   = Color(0xFFFFF5FF);
   static const text        = Color(0xFF0A0A0A);
   static const textMuted   = Color(0xFF474747);
-  static const border      = Color(0xFF808080);
+  static const border      = Color.fromARGB(255,217,193,193);
   static const borderMuted = Color(0xFF9E9E9E);
   static const primary     = Color(0xFF742D33);
   static const secondary   = Color(0xFF002E2E);
